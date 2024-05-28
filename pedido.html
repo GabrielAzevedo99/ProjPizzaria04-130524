@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pedido</title>
+
+        <style>
+            body{
+                font-family: monospace;
+                text-align: left;
+                margin: 0 auto;
+                padding: 30px;
+                background-color: #F3E5AB;
+            }
+
+            h1, h2{
+                text-align: left;
+                color: brown;
+            }
+
+            table{
+                border-collapse: collapse;
+                margin-top: 20px;
+            }
+
+            table, th, td{
+                border: 1px solid black;
+                padding: 10px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <h1>Resumo do Pedido:</h1>
+        <table>
+            <tr>
+                Descrição do Pedido:
+            </tr>
+            <tr>
+                <td id="pedido-descricao">--------</td>
+            </tr>
+        </table>
+
+        <h2> Total do Pedido:</h2>
+        <p id="pedido-total">R$ ------ </p>
+
+        <button onclick="window.location.href='cardapio.html'">Retornar</button>
+       <button onclick="window.location.href='bebida.html'">Confirmar</button>
+
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Extrair os parametros da URL:
+                const urlParams = new URLSearchParams(window.location.search);
+                const pedidoString = urlParams.get('pedido');
+
+                if (pedidoString){
+                    // Converter a string JSON em objeto JavaScript
+                    const pedidoJSON = JSON.parse(pedidoString);
+
+                    // Atualizar o conteudo da pagina com os detalhes do pedido
+                    const descricaoPedidoElement = document.getElementById('pedido-descricao');
+                    descricaoPedidoElement.innerHTML = pedidoJSON.descricao;
+
+                    const totalPedidoElement = document.getElementById('pedido-total');
+                    totalPedidoElement.textContent = 'Total do Pedido R$ ' + pedidoJSON.total;
+                }else{
+                    // Caso não haja dados do pedido:
+                    const pedidoDetailsElement = document.getElementById('pedido-details');
+                    pedidoDetailsElement.innerHTML = '<p>Não foi possivel recuperar os detalhes do pedido</p>'
+                }
+            })
+
+            
+        </script>
+
+<script src="./pedido.js"></script>
+
+
+    </body>
+
+</html>
