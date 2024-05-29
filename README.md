@@ -10,7 +10,7 @@ https://github.com/GabrielAzevedo99/ProjPizzaria04-130524/assets/95583993/dda30f
 <p>node.js intalado; </p>
 <p>Biblioteca express; </p>
 <p>Rode o server.js; </p>
-<p>É por fim rode o index.html</p>
+<p>E por fim rode o index.html. </p>
 
 Link do meu linkedin - https://www.linkedin.com/in/gabriel-santos-azevedo-258417213/
 
