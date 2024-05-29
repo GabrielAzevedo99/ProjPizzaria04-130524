@@ -1,69 +1,92 @@
-/* 
-==================================================
-    Projeto: Pizzaria
-    Autor: Gabriel Santos Azevedo
-    Data: 27/o5/2024
-    Descrição: 
-"/" -> Index.html
-"/cardapio" -> Montagem da Pizza
-"/pedido" -> Recebe o conteúdo da pizza montada em JSON e apresenta as opções (Retornar ou Confirmar);
-"/bebidas" -> Recebe o conteúdo da pizza montada em JSON e apresenta as opções de bebidas em tabelas, com pelo menos 5 bebidas e uma gestão de estoque. Ao ser adicionado é limitado a quantidade, chegando em 0 é apresentado "SEM ESTOQUE" e destacado em vermelho. 
-No final da seleção é apresentado o pedido completo com o valor completo. 
-==================================================
-*/
-
-// Importação dos módulos:
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
 
-// Criação do servidor:
+// criação do server
 const app = express();
 
-// Definindo o diretório raiz dos arquivos estáticos
-app.use(express.static(path.join(__dirname)));
-
-// Definindo os endpoints para cada página HTML
-app.get('/cardapio', (req, res) => {
-    serveStaticPage('cardapio.html', res);
-});
-
-app.get('/pedido', (req, res) => {
-    serveStaticPage('pedido.html', res);
-});
-
-app.get('/bebidas', (req, res) => {
-    serveStaticPage('bebidas.html', res);
-});
-
 app.get('/', (req, res) => {
-    serveStaticPage('index.html', res);
-});
-
-// Função para servir páginas estáticas
-function serveStaticPage(pageName, res) {
-    const pagePath = path.join(__dirname, pageName);
-    fs.readFile(pagePath, (err, data) => {
+    fs.readFile(path.join(__dirname, 'index.html'), (err, data) => {
         if (err) {
-            res.status(500).send('Erro interno do servidor');
+            res.status(500).send("500 - Erro Interno do Servidor");
         } else {
             res.status(200).type('text/html').send(data);
         }
     });
-}
-
-// Tratamento de erro para rotas não encontradas
-app.use((req, res, next) => {
-    res.status(404).send('Página não encontrada');
 });
 
-// Tratamento de erro genérico
-app.use((err, req, res, next) => {
-    console.error(err.stack);
-    res.status(500).send('Erro no servidor');
+app.get('/Logo.png', (req, res) => {
+    fs.readFile(path.join(__dirname, 'Logo.png'), (err, data) => {
+        if (err) {
+            res.status(500).send("500 - Erro Interno do Servidor");
+        } else {
+            res.status(200).type('png').send(data);
+        }
+    });
 });
 
-// Configurando o servidor para escutar na porta 4500
+app.get('/cardapio', (req, res) => {
+    fs.readFile(path.join(__dirname, 'cardapio.html'), (err, data) => {
+        if (err) {
+            res.status(500).send("500 - Erro Interno do Servidor");
+        } else {
+            res.status(200).type('text/html').send(data);
+        }
+    });
+});
+
+// Add route for /cardapio.html
+app.get('/cardapio.html', (req, res) => {
+    fs.readFile(path.join(__dirname, 'cardapio.html'), (err, data) => {
+        if (err) {
+            res.status(500).send("500 - Erro Interno do Servidor");
+        } else {
+            res.status(200).type('text/html').send(data);
+        }
+    });
+});
+
+app.get('/cardapio.js', (req, res) => {
+    fs.readFile(path.join(__dirname, 'cardapio.js'), (err, data) => {
+        if (err) {
+            res.status(500).send("500 - Erro Interno do Servidor");
+        } else {
+            res.status(200).type('text/javascript').send(data);
+        }
+    });
+});
+
+app.get('/bebida', (req, res) => {
+    fs.readFile(path.join(__dirname, 'bebida.html'), (err, data) => {
+        if (err) {
+            res.status(500).send("500 - Erro Interno do Servidor");
+        } else {
+            res.status(200).type('text/html').send(data);
+        }
+    });
+});
+
+app.get('/bebida.js', (req, res) => {
+    fs.readFile(path.join(__dirname, 'bebida.js'), (err, data) => {
+        if (err) {
+            res.status(500).send("500 - Erro Interno do Servidor");
+        } else {
+            res.status(200).type('text/javascript').send(data);
+        }
+    });
+});
+
+app.get('/pedido', (req, res) => {
+    fs.readFile(path.join(__dirname, 'pedido.html'), (err, data) => {
+        if (err) {
+            res.status(500).send("500 - Erro Interno do Servidor");
+        } else {
+            res.status(200).type('text/html').send(data);
+        }
+    });
+});
+
+// configuração do server
 const PORT = 4500;
 app.listen(PORT, () => {
     console.log(`Servidor criado na porta: ${PORT}`);

@@ -1,35 +1,25 @@
-<!-- 
-==================================================
-    Projeto: Pizzaria
-    Autor: Gabriel Santos Azevedo
-    Data: 27/o5/2024
-    Descrição: 
-"/" -> Index.html
-"/cardapio" -> Montagem da Pizza
-"/pedido" -> Recebe o conteúdo da pizza montada em JSON e apresenta as opções (Retornar ou Confirmar);
-"/bebidas" -> Recebe o conteúdo da pizza montada em JSON e apresenta as opções de bebidas em tabelas, com pelo menos 5 bebidas e uma gestão de estoque. Ao ser adicionado é limitado a quantidade, chegando em 0 é apresentado "SEM ESTOQUE" e destacado em vermelho. 
-No final da seleção é apresentado o pedido completo com o valor completo. 
-==================================================
--->
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pizzaria</title>
+    
     <style>
         body{
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #F3E5AB;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
+            font-family: monospace;
+            text-align: left;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #fafafa;
         }
 
-        h1, h2{
-            color: #6D2E0D;
-            margin-top: 20px;
+        h1{
+            text-align: left;
+            color: #8b0000;
+        } 
+        h2{
+            text-align: left;
         }
 
         label{
@@ -41,7 +31,7 @@ No final da seleção é apresentado o pedido completo com o valor completo.
             margin-top: 20px;
             padding: 10px 20px;
             font-size: 16px;
-            background-color: #6D2E0D;
+            background-color: #4caf50;
             color: white;
             border: none;
             border-radius: 5px;
@@ -50,127 +40,127 @@ No final da seleção é apresentado o pedido completo com o valor completo.
         }
 
         button:hover{
-            background-color: #955734;
+            background-color:#45a049;
         }
 
         #total-pedido{
-            font-weight: bold;
             margin-top: 20px;
         }
 
         #descricao-pedido{
             margin-top: 20px;
         }
-
     </style>
+
 </head>
+
 <body>
-    <h1> Pizzaria do Zé....</h1>
+    <h1>Pizzaria do Zé</h1>
 
-    <h2> Monta seu pedido</h2>
- 
-    <h2> Selecione o sabor da pizza:</h2>
-    <p> Valores - (Brotinho / Padrão / Grande)</p>
-    <label>
-        <input type="radio" name="sabor" value="Margherita" data-sabor="Margherita"> 
-        Margherita (Brotinho: R$ 18.75 / Padrão: R$ 25.00 / Grande: R$ 31.25)
-    </label>
-    <label>
-        <input type="radio" name="sabor" value="Calabresa" data-sabor="Calabresa"> 
-        Calabresa (Brotinho: R$ 21.00 / Padrão: R$ 28.00 / Grande: R$ 35.00)
-    </label>
-    <label>
-        <input type="radio" name="sabor" value="Frango com Catupiry" data-sabor="Frango com Catupiry"> 
-        Frango com Catupiry (Brotinho: R$ 22.50 / Padrão: R$ 30.00 / Grande: R$ 37.50)
-    </label>
-    <label>
-        <input type="radio" name="sabor" value="Portuguesa" data-sabor="Portuguesa"> 
-        Portuguesa (Brotinho: R$ 24.00 / Padrão: R$ 32.00 / Grande: R$ 40.00)
-    </label>
-    <label>
-        <input type="radio" name="sabor" value="Quatro Queijos" data-sabor="Quatro Queijos"> 
-        Quatro Queijos (Brotinho: R$ 26.25 / Padrão: R$ 35.00 / Grande: R$ 43.75)
-    </label>
+    <h2>Monte seu pedido:</h2>
 
+    <h2>Selecione o sabor da pizza:</h2>
 
-    <h2> Selecione o tamanho da Pizza:</h2>
-    <label>
-        <input type="radio" name="tamanho" value="Brotinho" data-tamanho="Brotinho"> 
-        Brotinho (20cm - 4 Pedaços)
+    <label >
+        <input type="radio" name="sabor" value="Margherita" data-sabor="Margherita">
+        Margherita (R$25,00)
     </label>
-    <label>
-        <input type="radio" name="tamanho" value="Padrao" data-tamanho="Padrao"> 
-        Padrão (30cm - 8 Pedaços)
+    <label >
+        <input type="radio" name="sabor" value="Calabresa" data-sabor="Calabresa">
+        Calabresa (R$25,00)
     </label>
-    <label>
-        <input type="radio" name="tamanho" value="Grande" data-tamanho="Grande"> 
-        Grande (40cm - 12 Pedaçoes)
+    <label >
+        <input type="radio" name="sabor" value="Mussarela" data-sabor="Mussarela">
+        Mussarela (R$30,00)
     </label>
+    <label >
+        <input type="radio" name="sabor" value="Portuguesa" data-sabor="Portuguesa">
+        Portuguesa (R$35,00)
+    </label>
+    <label >
+        <input type="radio" name="sabor" value="Frango com catupiry" data-sabor="Frango com catupiry">
+        Frango com catupiry (R$33,00)
+    </label>
+    <br><hr>
 
+    <h2>Selecione o tamanho da Pizza:</h2>
 
-    <h2>Selecione o tipo de borda da Pìzza:</h2>
     <label>
-        <input type="radio" name="borda" value="Sem Borda" data-borda="Sem Borda"> 
-        Sem Borda
+        <input type="radio" name="tamanho" value="Brotinho" data-tamanho="Brotinho">
+        Brotinho (4 pedaços) 25% de desconto
     </label>
     <label>
-        <input type="radio" name="borda" value="Tradicional" data-borda="Tradicional"> 
+        <input type="radio" name="tamanho" value="Padrão" data-tamanho="Padrão">
+        Padrão (8 pedaços)
+    </label>
+    <label>
+        <input type="radio" name="tamanho" value="Grande" data-tamanho="Grande">
+        Grande (12 pedaços) +25% 
+    </label>
+    <br><hr>
+
+    <h2>Selecione o tipo de borda da Pizza:</h2>
+
+    <label>
+        <input type="radio" name="borda" value="Sem borda" data-tamanho="Sem borda">
+        Sem borda
+    </label>
+    <label>
+        <input type="radio" name="borda" value="Tradicional" data-tamanho="Tradicional">
         Tradicional
     </label>
     <label>
-        <input type="radio" name="borda" value="Recheada Catupiry" data-borda="Recheada Catupiry"> 
-        Recheada Catupiry +R$ 2.00
+        <input type="radio" name="borda" value="Recheada" data-tamanho="Recheada">
+        Recheada + R$2,00
     </label>
     <label>
-        <input type="radio" name="borda" value="Recheada Cheddar" data-borda="Recheada Cheddar"> 
-        Recheada Cheddar +R$ 3.00
+        <input type="radio" name="borda" value="Recheada Cheddar" data-tamanho="Recheada Cheddar">
+        Recheada Cheddar + R$3,00
     </label>
+    <br><hr>
 
+    <h2>Itens extras:</h2>
 
-    <h2>Selecione os ingredientes extras:</h2>
     <label>
-        <input type="checkbox" name="extra-queijo" data-extra="extra-queijo"> 
-        Queijo Extra +R$ 2.00   
+        <input type="checkbox" name="extra-queijo" data-extra="extra-queijo">
+        Queijo extra +$2,00
     </label>
     <label>
-        <input type="checkbox" name="extra-cheddar" data-extra="extra-cheddar"> 
-        Cheddar Extra +R$ 5.00   
+        <input type="checkbox" name="extra-bacon" data-extra="extra-bacon">
+        Bacon extra +$3,00
     </label>
     <label>
-        <input type="checkbox" name="extra-bacon" data-extra="extra-bacon"> 
-        Bacon Extra +R$ 3.00
+        <input type="checkbox" name="extra-pepperoni" data-extra="extra-pepperoni">
+        Pepperoni extra +$4,00
     </label>
     <label>
-        <input type="checkbox" name="extra-pepperoni" data-extra="extra-pepperoni"> 
-        Pepperoni +R$ 4.00
+        <input type="checkbox" name="extra-cheddar" data-extra="extra-cheddar">
+        Cheddar extra +$5,00
     </label>
+    <br><hr>
 
+    <h2>Itens opcionais:</h2>
 
-    <h2>Selecione os Itens Opcionais (Sem Custo):</h2>
     <label>
-        <input type="checkbox" name="opcionais-azeitona" data-extra="opcionais-azeitona"> 
-        Azeitona 
+        <input type="checkbox" name="opcionais-azeitona" data-extra="opcionais-azeitona">
+        Azeitona
     </label>
     <label>
-        <input type="checkbox" name="opcionais-azeite" data-extra="opcionais-azeite"> 
-        Azeite 
+        <input type="checkbox" name="opcionais-azeite" data-extra="opcionais-azeite">
+        Azeite
     </label>
     <label>
-        <input type="checkbox" name="opcionais-oregano" data-extra="opcionais-oregano"> 
+        <input type="checkbox" name="opcionais-oregano" data-extra="opcionais-oregano">
         Oregano
     </label>
     <label>
-        <input type="checkbox" name="opcionais-pimenta" data-extra="opcionais-pimenta"> 
-        Pimenta 
+        <input type="checkbox" name="opcionais-pimenta" data-extra="opcionais-pimenta">
+        Pimenta
     </label>
+    <br><hr>
 
+    <button>Montar Pizza</button>
 
-    <button> Montar Pizza </button>
-    
     <script src="./cardapio.js"></script>
-    <script src="./pedido.js"></script>
-
-
 </body>
-
 </html>

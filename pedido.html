@@ -1,97 +1,100 @@
-<!-- 
-==================================================
-    Projeto: Pizzaria
-    Autor: Gabriel Santos Azevedo
-    Data: 27/o5/2024
-    Descrição: 
-"/" -> Index.html
-"/cardapio" -> Montagem da Pizza
-"/pedido" -> Recebe o conteúdo da pizza montada em JSON e apresenta as opções (Retornar ou Confirmar);
-"/bebidas" -> Recebe o conteúdo da pizza montada em JSON e apresenta as opções de bebidas em tabelas, com pelo menos 5 bebidas e uma gestão de estoque. Ao ser adicionado é limitado a quantidade, chegando em 0 é apresentado "SEM ESTOQUE" e destacado em vermelho. 
-No final da seleção é apresentado o pedido completo com o valor completo. 
-==================================================
--->
-
 <!DOCTYPE html>
 <html lang="pt-BR">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Pedido</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido - Pizzaria do Zé</title>
 
-        <style>
-            body{
-                font-family: monospace;
-                text-align: left;
-                margin: 0 auto;
-                padding: 30px;
-                background-color: #F3E5AB;
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: #fafafa;
+            color: #333;
+        }
+
+        h1, h2 {
+            color: #8b0000;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #000;
+            padding: 10px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pizza</h1>
+    <h2>Descrição</h2>
+    <table>
+        <tr>
+            <td id="pedidoDescricao"></td>
+        </tr>
+    </table>
+    <h2>Total: R$<span id="totalPizza">00,00</span></h2>
+
+    <button id="voltar">Retornar</button>
+    <button id="confirmar">Confirmar</button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function(){
+            //Extrair os parametros da URL
+            const urlParams = new URLSearchParams(window.location.search)
+            const pedidoString = urlParams.get('pedido')
+
+            if(pedidoString){
+                //Converter a string JSON em objeto JS
+                const pedidoJSON = JSON.parse(pedidoString)
+
+                //Atualiza o conteudo da pagina com os detalhes
+                const descricaoPedidoElement = document.getElementById("pedidoDescricao")
+                descricaoPedidoElement.innerHTML = pedidoJSON.descricao
+                totalPizza = parseInt(pedidoJSON.total)
+                document.getElementById("totalPizza").textContent = totalPizza
+            }else{
+                const pedidoDetailsElement= document.getElementById('pedido-details')
+                pedidoDetailsElement.innerHTML = '<p> Não foi possivel recuperar os detalhes do pedido<p>'
             }
 
-            h1, h2{
-                text-align: left;
-                color: brown;
+
+            function voltarPagina(){
+                
+                window.location.href = `cardapio`
             }
-
-            table{
-                border-collapse: collapse;
-                margin-top: 20px;
+            function confirmarPedido(){
+                const urlParams = new URLSearchParams(window.location.search)
+                const pedidoString = urlParams.get('pedido')
+                window.location.href = `bebida?pedido=${pedidoString}`
             }
+            const voltar = document.getElementById('voltar')
+            voltar.addEventListener('click',voltarPagina)
 
-            table, th, td{
-                border: 1px solid black;
-                padding: 10px;
-            }
-        </style>
-    </head>
-
-    <body>
-        <h1>Resumo do Pedido:</h1>
-        <table>
-            <tr>
-                Descrição do Pedido:
-            </tr>
-            <tr>
-                <td id="pedido-descricao">--------</td>
-            </tr>
-        </table>
-
-        <h2> Total do Pedido:</h2>
-        <p id="pedido-total">R$ ------ </p>
-
-        <button onclick="window.location.href='cardapio.html'">Retornar</button>
-       <button onclick="window.location.href='bebida.html'">Confirmar</button>
-
-
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                // Extrair os parametros da URL:
-                const urlParams = new URLSearchParams(window.location.search);
-                const pedidoString = urlParams.get('pedido');
-
-                if (pedidoString){
-                    // Converter a string JSON em objeto JavaScript
-                    const pedidoJSON = JSON.parse(pedidoString);
-
-                    // Atualizar o conteudo da pagina com os detalhes do pedido
-                    const descricaoPedidoElement = document.getElementById('pedido-descricao');
-                    descricaoPedidoElement.innerHTML = pedidoJSON.descricao;
-
-                    const totalPedidoElement = document.getElementById('pedido-total');
-                    totalPedidoElement.textContent = 'Total do Pedido R$ ' + pedidoJSON.total;
-                }else{
-                    // Caso não haja dados do pedido:
-                    const pedidoDetailsElement = document.getElementById('pedido-details');
-                    pedidoDetailsElement.innerHTML = '<p>Não foi possivel recuperar os detalhes do pedido</p>'
-                }
-            })
-
-            
-        </script>
-
-<script src="./pedido.js"></script>
-
-
-    </body>
-
+            const confirmar = document.getElementById('confirmar')
+            confirmar.addEventListener('click', confirmarPedido)
+        })
+    </script>
+</body>
 </html>

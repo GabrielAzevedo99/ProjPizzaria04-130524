@@ -1,318 +1,328 @@
-/* 
-==================================================
-    Projeto: Pizzaria
-    Autor: Gabriel Santos Azevedo
-    Data: 27/o5/2024
-    Descrição: 
-"/" -> Index.html
-"/cardapio" -> Montagem da Pizza
-"/pedido" -> Recebe o conteúdo da pizza montada em JSON e apresenta as opções (Retornar ou Confirmar);
-"/bebidas" -> Recebe o conteúdo da pizza montada em JSON e apresenta as opções de bebidas em tabelas, com pelo menos 5 bebidas e uma gestão de estoque. Ao ser adicionado é limitado a quantidade, chegando em 0 é apresentado "SEM ESTOQUE" e destacado em vermelho. 
-No final da seleção é apresentado o pedido completo com o valor completo. 
-==================================================
-*/
-
-document.addEventListener('DOMContentLoaded', function(){
-
-    // ESTRUTURA DO PROJETO:
+document.addEventListener('DOMContentLoaded',function(){
+    //Estrutura do projeto:
     class Pizza{
         constructor(){
-            this.descricao = "Pizza";
+            this.descricao = "Pizza"
         }
 
         getDescricao(){
-            return this.descricao;
+            return this.descricao
         }
 
         custo(){
-            return 0;
+            return 0
         }
     }
 
-    // Implementação concreta das interface Componente para Pizza Personalizada
+    //Implementação concreta da interface Componete para Pizza personalizada
     class PizzaPersonalizada extends Pizza{
         constructor(sabor, tamanho, borda){
-            super();
-            this.descricao =`Sabor:<br> -   ${sabor}<br><br>Tamanho:<br> -   ${tamanho}<br><br>Borda:<br> -   ${borda}<br><br>Itens Extra / Opcionais: `;
-            this.sabor = sabor;
-            this.tamanho = tamanho;
-            this.borda = borda;
+            super()
+            this.descricao = `Sabor: ${sabor} <br><br>Tamanho: ${tamanho} <br><br>Borda: ${borda} <br><br>Itens Extras/Opcionais:`
+            this.sabor = sabor
+            this.tamanho = tamanho
+            this.borda = borda
         }
 
         custo(){
-            let preco = 0;
-
-            if(this.sabor === "Margherita"){
+            let preco = 0
+            //Adotando tudo padrão calabresa
+            if(this.sabor === "Calabresa"){
                 if(this.tamanho === "Brotinho"){
-                    preco = 18.75;
-                }else if (this.tamanho == "Padrao"){
-                    preco = 25.00;
-                }else if (this.tamanho == "Grande"){
-                    preco = 31.25;
+                    preco = 25*0.75
+                }else if(this.tamanho === "Padrão"){
+                    preco = 25
+                }else if(this.tamanho === "Grande"){
+                    preco = 25*1.25
+                }
+                if(this.borda === "Recheada"){
+                    preco += 2
+                }else if(this.borda === "Recheada Cheddar"){
+                    preco += 3
+                }else{
+                    preco = preco
                 }
             }
             
-            if(this.sabor === "Calabresa"){
+            if(this.sabor === "Margherita"){
                 if(this.tamanho === "Brotinho"){
-                    preco = 21.00;
-                }else if (this.tamanho == "Padrao"){
-                    preco = 28.00;
-                }else if (this.tamanho == "Grande"){
-                    preco = 35.00;
-                }   
+                    preco = 25*0.75
+                }else if(this.tamanho === "Padrão"){
+                    preco = 25
+                }else if(this.tamanho === "Grande"){
+                    preco = 25*1.25
+                }
+                if(this.borda === "Recheada"){
+                    preco += 2
+                }else if(this.borda === "Recheada Cheddar"){
+                    preco += 3
+                }else{
+                    preco = preco
+                }
             }
 
-            if(this.sabor === "Frango com Catupiry"){
+            if(this.sabor === "Mussarela"){
                 if(this.tamanho === "Brotinho"){
-                    preco = 22.50;
-                }else if (this.tamanho == "Padrao"){
-                    preco = 30.00;
-                }else if (this.tamanho == "Grande"){
-                    preco = 37.50;
-                }   
+                    preco = 30*0.75
+                }else if(this.tamanho === "Padrão"){
+                    preco = 30
+                }else if(this.tamanho === "Grande"){
+                    preco = 30*1.25
+                }
+                if(this.borda === "Recheada"){
+                    preco += 2
+                }else if(this.borda === "Recheada Cheddar"){
+                    preco += 3
+                }else{
+                    preco = preco
+                }
             }
 
             if(this.sabor === "Portuguesa"){
                 if(this.tamanho === "Brotinho"){
-                    preco = 24.00;
-                }else if (this.tamanho == "Padrao"){
-                    preco = 32.00;
-                }else if (this.tamanho == "Grande"){
-                    preco = 40.00;
-                }   
+                    preco = 35*0.75
+                }else if(this.tamanho === "Padrão"){
+                    preco = 35
+                }else if(this.tamanho === "Grande"){
+                    preco = 35*1.25
+                }
+                if(this.borda === "Recheada"){
+                    preco += 2
+                }else if(this.borda === "Recheada Cheddar"){
+                    preco += 3
+                }else{
+                    preco = preco
+                }
             }
 
-            if(this.sabor === "Quatro Queijos"){
+            if(this.sabor === "Frango com catupiry"){
                 if(this.tamanho === "Brotinho"){
-                    preco = 26.25;
-                }else if (this.tamanho == "Padrao"){
-                    preco = 35.00;
-                }else if (this.tamanho == "Grande"){
-                    preco = 43.75;
-                }   
+                    preco = 33*0.75
+                }else if(this.tamanho === "Padrão"){
+                    preco = 33
+                }else if(this.tamanho === "Grande"){
+                    preco = 33*1.25
+                }
+                if(this.borda === "Recheada"){
+                    preco += 2
+                }else if(this.borda === "Recheada Cheddar"){
+                    preco += 3
+                }else{
+                    preco = preco
+                }
             }
 
-            return preco.toFixed(2);
+            return preco.toFixed(2)
         }
     }
 
-    // Decorator Abstrato:
+    //Decorator Abstrato
     class Decorator extends Pizza{
         constructor(pizza){
-            super();
-            this.pizza = pizza;
+            super()
+            this.pizza = pizza
         }
 
         getDescricao(){
-            return this.pizza.getDescricao();
+            return this.pizza.getDescricao()
         }
 
         custo(){
-            return this.pizza.custo();
+            return this.pizza.custo()
         }
     }
 
-    // Decorator Concretos para adicionar ingredientes extras:
+
+    // Decorator Concretos para adicionar ingredientes extras
     class QueijoExtra extends Decorator{
         constructor(pizza){
-            super(pizza);
+            super(pizza)
         }
 
         getDescricao(){
-            return `${this.pizza.getDescricao()}<br> -   Queijo Extra`;
+            return `${this.pizza.getDescricao()}<br>- Queijo extra`
         }
 
         custo(){
-            return (parseFloat(this.pizza.custo()) + 2.00).toFixed(2);
-        }
-    }
-
-    class CheddarExtra extends Decorator{
-        constructor(pizza){
-            super(pizza);
-        }
-
-        getDescricao(){
-            return `${this.pizza.getDescricao()}<br> -   Cheddar Extra`;
-        }
-
-        custo(){
-            return (parseFloat(this.pizza.custo()) + 5.00).toFixed(2);
-        }
-    }
-
-    class BaconExtra extends Decorator{
-        constructor(pizza){
-            super(pizza);
-        }
-
-        getDescricao(){
-            return `${this.pizza.getDescricao()}<br> -   Bacon Extra`;
-        }
-
-        custo(){
-            return (parseFloat(this.pizza.custo()) + 3.00).toFixed(2);
+            return (parseFloat(this.pizza.custo()) + 2.00).toFixed(2)
         }
     }
 
     class PepperoniExtra extends Decorator{
         constructor(pizza){
-            super(pizza);
+            super(pizza)
         }
 
         getDescricao(){
-            return `${this.pizza.getDescricao()}<br> -   Pepperoni Extra`;
+            return `${this.pizza.getDescricao()}<br>- Pepperoni extra`
         }
 
         custo(){
-            return (parseFloat(this.pizza.custo()) + 4.00).toFixed(2);
+            return (parseFloat(this.pizza.custo()) + 4.00).toFixed(2)
+        }
+    }
+
+    class BaconExtra extends Decorator{
+        constructor(pizza){
+            super(pizza)
+        }
+
+        getDescricao(){
+            return `${this.pizza.getDescricao()}<br>- Bacon extra`
+        }
+
+        custo(){
+            return (parseFloat(this.pizza.custo()) + 3.00).toFixed(2)
+        }
+    }
+
+    class CheddarExtra extends Decorator{
+        constructor(pizza){
+            super(pizza)
+        }
+
+        getDescricao(){
+            return `${this.pizza.getDescricao()}<br>- Cheddar extra`
+        }
+
+        custo(){
+            return (parseFloat(this.pizza.custo()) + 5.00).toFixed(2)
         }
     }
 
     class AzeitonaOpcional extends Decorator{
         constructor(pizza){
-            super(pizza);
+            super(pizza)
         }
 
         getDescricao(){
-            return `${this.pizza.getDescricao()}<br> -   Azeitona Opcional`;
+            return `${this.pizza.getDescricao()}<br>- Azeitona Opcional`
         }
 
         custo(){
-            return (parseFloat(this.pizza.custo()) + 0.00).toFixed(2);
+            return (parseFloat(this.pizza.custo()) + 0.00).toFixed(2)
         }
     }
 
     class AzeiteOpcional extends Decorator{
         constructor(pizza){
-            super(pizza);
+            super(pizza)
         }
 
         getDescricao(){
-            return `${this.pizza.getDescricao()}<br> -   Azeite Opcional`;
+            return `${this.pizza.getDescricao()}<br>- Azeite Opcional`
         }
 
         custo(){
-            return (parseFloat(this.pizza.custo()) + 0.00).toFixed(2);
+            return (parseFloat(this.pizza.custo()) + 0.00).toFixed(2)
         }
     }
 
     class OreganoOpcional extends Decorator{
         constructor(pizza){
-            super(pizza);
+            super(pizza)
         }
 
         getDescricao(){
-            return `${this.pizza.getDescricao()}<br> -   Oregano Opcional`;
+            return `${this.pizza.getDescricao()}<br>- Oregano Opcional`
         }
 
         custo(){
-            return (parseFloat(this.pizza.custo()) + 0.00).toFixed(2);
+            return (parseFloat(this.pizza.custo()) + 0.00).toFixed(2)
         }
     }
 
     class PimentaOpcional extends Decorator{
         constructor(pizza){
-            super(pizza);
+            super(pizza)
         }
 
         getDescricao(){
-            return `${this.pizza.getDescricao()}<br> -   Pimenta do Reino Opcional`;
+            return `${this.pizza.getDescricao()}<br>- Pimenta Opcional`
         }
 
         custo(){
-            return (parseFloat(this.pizza.custo()) + 0.00).toFixed(2);
+            return (parseFloat(this.pizza.custo()) + 0.00).toFixed(2)
         }
     }
 
-    // SIMULAÇÃO DA INTERFACE DE UTILIZAÇÃO DO PROJETO ----------------------------------
+
+
+
+    //Simulação da interface de utilização do projeto
     function montarPizza(){
 
-        // Obtem Sabor selecionado:
-        let saborSelecionado = document.querySelector('input[name="sabor"]:checked');
-        let sabor = saborSelecionado ? saborSelecionado.value : '';
+        // Obem o sabor selecionado
+        let saborSelecionado = document.querySelector('input[name="sabor"]:checked')
+        let sabor = saborSelecionado ? saborSelecionado.value : ''
+        
+        //Obtem o tamanho selecionado
+        let tamanhoSelecionado = document.querySelector('input[name="tamanho"]:checked')
+        let tamanho = tamanhoSelecionado ? tamanhoSelecionado.value : ''
 
-        // Obtem Tamanho selecionado:
-        let tamanhoSelecionado = document.querySelector('input[name="tamanho"]:checked');
-        let tamanho = tamanhoSelecionado ? tamanhoSelecionado.value : '';     
+        //Obtem a borda selecionada
+        let bordaSelecionado = document.querySelector('input[name="borda"]:checked')
+        let borda = bordaSelecionado ? bordaSelecionado.value : ''
 
-        // Obtem Borda selecinado:
-        let bordaSelecionado = document.querySelector('input[name="borda"]:checked');
-        let borda = bordaSelecionado ? bordaSelecionado.value : '';
+        //Criando Objeto PizzaPersonalizada cin base na seleção do usuário
+        let pizzaPersonalizada = new PizzaPersonalizada(sabor, tamanho, borda)
 
-        // Criando Objeto PizzaPersonalizada com base nas seleções do Usuarios:
-        let pizzaPersonalizada = new PizzaPersonalizada(sabor, tamanho, borda);
-
-        // Aplicação decorador para ingredientes extras e opcionais selecionados:
-        let queijoExtraCheckbox = document.querySelector('input[name="extra-queijo"]:checked');
+        //Aplicação decorator para ingredientes extras e opcionais selecionados
+        //Ingredientes extras
+        let queijoExtraCheckbox = document.querySelector('input[name="extra-queijo"]:checked')
         if(queijoExtraCheckbox){
-            pizzaPersonalizada = new QueijoExtra(pizzaPersonalizada);
+            pizzaPersonalizada = new QueijoExtra(pizzaPersonalizada)
+        }
+        let baconExtraCheckbox = document.querySelector('input[name="extra-bacon"]:checked')
+        if(baconExtraCheckbox){
+            pizzaPersonalizada = new BaconExtra(pizzaPersonalizada)
+        }
+        let pepperoniExtraCheckbox = document.querySelector('input[name="extra-pepperoni"]:checked')
+        if(pepperoniExtraCheckbox){
+            pizzaPersonalizada = new PepperoniExtra(pizzaPersonalizada)
+        }
+        let cheddarExtraCheckbox = document.querySelector('input[name="extra-cheddar"]:checked')
+        if(cheddarExtraCheckbox){
+            pizzaPersonalizada = new CheddarExtra(pizzaPersonalizada)
         }
 
-        let cheddarExtraCheckbox = document.querySelector('input[name="extra-cheddar"]:checked');
-        if(cheddarExtraCheckbox){
-            pizzaPersonalizada = new CheddarExtra(pizzaPersonalizada);
+        //Opcionais
+        let azeitonaCheckbox = document.querySelector('input[name="opcionais-azeitona"]:checked')
+        if(azeitonaCheckbox){
+            pizzaPersonalizada = new AzeitonaOpcional(pizzaPersonalizada)
+        }
+        let azeiteCheckbox = document.querySelector('input[name="opcionais-azeite"]:checked')
+        if(azeiteCheckbox){
+            pizzaPersonalizada = new AzeiteOpcional(pizzaPersonalizada)
+        }
+        let oreganoCheckbox = document.querySelector('input[name="opcionais-oregano"]:checked')
+        if(oreganoCheckbox){
+            pizzaPersonalizada = new OreganoOpcional(pizzaPersonalizada)
+        }
+        let pimentaCheckbox = document.querySelector('input[name="opicionais-pimenta"]:checked')
+        if(pimentaCheckbox){
+            pizzaPersonalizada = new PimentaOpcional(pizzaPersonalizada)
         }
         
-        let baconExtraCheckbox = document.querySelector('input[name="extra-bacon"]:checked');
-        if(baconExtraCheckbox){
-            pizzaPersonalizada = new BaconExtra(pizzaPersonalizada);
-        }
 
-        let pepperoniExtraCheckbox = document.querySelector('input[name="extra-pepperoni"]:checked');
-        if(pepperoniExtraCheckbox){
-            pizzaPersonalizada = new PepperoniExtra(pizzaPersonalizada);
-        }
+        //Obtem custo e descrição da Pizza Personalizada
+        let custoTotal = parseFloat(pizzaPersonalizada.custo())
+        let pedidoTotal = pizzaPersonalizada.getDescricao()
 
-         // Igredientes Opcionais:
-         let azeitonaOpcionaisCheckbox = document.querySelector('input[name="opcionais-azeitona"]:checked');
-         if(azeitonaOpcionaisCheckbox){
-            pizzaPersonalizada = new AzeitonaOpcional(pizzaPersonalizada);
-        }
- 
-         let azeiteOpcionaisCheckbox = document.querySelector('input[name="opcionais-azeite"]:checked');
-         if(azeiteOpcionaisCheckbox){
-            pizzaPersonalizada = new AzeiteOpcional(pizzaPersonalizada);
-        }
-         
-         let oreganoOpcionaisCheckbox = document.querySelector('input[name="opcionais-oregano"]:checked');
-         if(oreganoOpcionaisCheckbox){
-            pizzaPersonalizada = new OreganoOpcional(pizzaPersonalizada);
-        }
- 
-         let pimentaExtraCheckbox = document.querySelector('input[name="opcionais-pimenta"]:checked');
-         if(pimentaExtraCheckbox){
-            pizzaPersonalizada = new PimentaOpcional(pizzaPersonalizada);
-        }
 
-        // Obter custo total e descrição da Pizza Personalizada
-        let custoTotal = parseFloat(pizzaPersonalizada.custo());
-        let pedidoTotal = pizzaPersonalizada.getDescricao();
-
-        // Exibir as informações da Pizza Personalizada:
-        //let totalPedidoElement = document.getElementById("total-pedido");
-        //totalPedidoElement.textContent = "R$ " + custoTotal.toFixed(2);
-
-        //let descricaoPedidoElement = document.getElementById("descricao-pedido");
-        //descricaoPedidoElement.innerHTML = pedidoTotal;
-
-        // Envia dados do pedido para o pedido.html em JSON
+        //Envia dados do pedido para o pedido.html em JSON
         const pedidoJSON = {
-            "descricao":pedidoTotal,
-            "total":custoTotal.toFixed(2)
-        };
+            "descricao": pedidoTotal,
+            "total": custoTotal.toFixed(2)
+        }
+        const pedidoString = JSON.stringify(pedidoJSON)
 
-        const pedidoString = JSON.stringify(pedidoJSON);
+        //Redirecionar para pedido.html e enviar dados
+        window.location.href= `pedido?pedido=${pedidoString}`
 
-        // Redirecionar para pedido.html e envia os dados do pedido
-        window.location.href = `pedido?pedido=${pedidoString}`;
-
-    }
+        }
+    //Chama a função montarPizza quando o botão é clicado
+    const button = document.querySelector('button')
+    button.addEventListener('click', montarPizza)
     
-    // Chama a função montarPizza quando o botão é clicado
-    const button = document.querySelector('button');
-    button.addEventListener('click', montarPizza);
-     
-});
-
-
+})

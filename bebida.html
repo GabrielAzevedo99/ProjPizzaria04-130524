@@ -1,101 +1,103 @@
-<!-- 
-==================================================
-    Projeto: Pizzaria
-    Autor: Gabriel Santos Azevedo
-    Data: 27/o5/2024
-    Descrição: 
-"/" -> Index.html
-"/cardapio" -> Montagem da Pizza
-"/pedido" -> Recebe o conteúdo da pizza montada em JSON e apresenta as opções (Retornar ou Confirmar);
-"/bebidas" -> Recebe o conteúdo da pizza montada em JSON e apresenta as opções de bebidas em tabelas, com pelo menos 5 bebidas e uma gestão de estoque. Ao ser adicionado é limitado a quantidade, chegando em 0 é apresentado "SEM ESTOQUE" e destacado em vermelho. 
-No final da seleção é apresentado o pedido completo com o valor completo. 
-==================================================
--->
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bebidas</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #F3E5AB;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-    h1 {
-      color: #6D2E0D;
-      margin-top: 20px;
-    }
-    table {
-      width: 90%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      background-color: #FFF;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    th, td {
-      border: 1px solid #dddddd;
-      padding: 12px;
-      text-align: left;
-    }
-    th {
-      background-color: #F2F2F2;
-    }
-    .btn {
-      padding: 10px 20px;
-      border: none;
-      background-color: #6D2E0D;
-      color: white;
-      cursor: pointer;
-      border-radius: 5px;
-      margin-top: 20px;
-      transition: background-color 0.3s ease;
-    }
-    .btn:hover {
-      background-color: #955734;
-    }
-    .sem-estoque {
-      color: red;
-      font-weight: bold;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Bebidas - Pizzaria do zé</title>
+    <style>
+      body {
+          font-family: Arial, sans-serif;
+          margin: 0 auto;
+          padding: 30px;
+          background-color: #fafafa;
+          color: #333;
+      }
+
+      h1 {
+          color: #8b0000;
+      }
+
+      table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 20px;
+      }
+
+      th, td {
+          border: 1px solid #ccc;
+          padding: 10px;
+          text-align: left;
+      }
+
+      th {
+          background-color: #f4f4f4;
+          font-weight: bold;
+      }
+
+      .btn {
+          margin-top: 20px;
+          padding: 10px 20px;
+          font-size: 16px;
+          background-color: #4caf50;
+          color: white;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: background-color 0.3s ease;
+      }
+
+      .btn:hover {
+          background-color: #45a049;
+      }
+
+      .sem-estoque {
+          color: red;
+          font-weight: bold;
+      }
   </style>
+
 </head>
 <body>
-  <h1>Produtos Disponíveis</h1>
-  <table id="produtos">
-    <thead>
-      <tr>
-        <th>Produto</th>
-        <th>Preço</th>
-        <th>Estoque</th>
-        <th>Ação</th>
-      </tr>
-    </thead>
-    <tbody id="produtos-corpo"></tbody>
-  </table>
+    <div id="estoque">
+        <h1>Bebidas</h1>
 
-  <h1>Seu Pedido</h1>
-  <table id="carrinho">
-    <thead>
-      <tr>
-        <th>Produto</th>
-        <th>Preço</th>
-        <th>Qtd</th>
-        <th>Ação</th>
-      </tr>
-    </thead>
-    <tbody id="carrinho-corpo"></tbody>
-  </table>
+        <table id="produtos">
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Preço</th>
+                    <th>Estoque</th>
+                    <th>Ação</th>
+                </tr>
+            </thead>
+            <tbody id="produtos-corpo"></tbody>
+        </table>
+    </div>
 
-  <h2>Total: R$ <span id="total">0.00</span></h2>
+    <hr>
 
-  <script src="bebida.js"></script>
+    <div id="cart">
+        <h1>Bebidas selecionadas</h1>
+        <br>
+        <table id="carrinho">
+            <thead id="carrinho-head"></thead>
+            <tbody id="carrinho-corpo"></tbody>
+        </table>
+    </div>
+
+    <div id="resumoPizza">
+        <h1>Pizza</h1>
+        <h2>Descrição da Pizza</h2>
+        <table>
+            <tr>
+                <td id="pedidoDescricao"></td>
+            </tr>
+        </table>
+    </div>
+    <h3>Valor Pizza: R$<span id="totalPizza">00,00</span></h3>
+    <h2>Valor Pedido: R$<span id="total">00,00</span></h2>
+
+
+    <script src="./bebida.js"></script>  
 </body>
 </html>
