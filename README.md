@@ -1,6 +1,6 @@
 <h2>Pizzaria do zé</h2> 
 <p>Sistema feito com html, css e node.js.</p>
-<p>Propossido de simular uma pizzaria onde você pode selecionar sua pizza e categorias e suas bebidas e fazer a cotação de quando ficou.</p>
+<p>Propossido de simular uma pizzaria onde você pode selecionar sua pizza e categorias e suas bebidas e fazer a cotação de quanto ficou.</p>
 <p>Segue video mostrando como ficou:</p>
 
 
